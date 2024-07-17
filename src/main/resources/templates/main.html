@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>분실물 찾기 사이트</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/main.js"></script>
+</head>
+
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <section id="header">
+            <div class="container">
+
+                <!-- 2024-07-10 이 부분 id 는 살려서 편집 필요 -->
+                <img th:if="${session.id == null}" src="/img/logo/LOGO.png" alt="로고" class="splash">
+                <img th:if="${session.id != null}" src="/img/logo/LOGO.png" alt="로고" class="splash" style="margin-top: 50px;">
+                <p>유실물 포털 웹사이트 (PYNK 개발)</p>
+                
+
+                <!-- Nav -->
+                <nav id="nav">
+                    <!-- 로그인 안 했을 때 -->
+                    <ul>
+                        <li><a class="icon solid fa-home" th:if="${session.id == null}"
+                                href="login"><span>로그인</span></a></li>
+                        <li><a class="icon solid fa-home" th:if="${session.id == null}"
+                                href="/signup"><span>회원가입</span></a></li>
+                    </ul>
+                    <!-- 로그인 했을 때 (일반회원) -->
+                    <ul>
+                        <li><a class="icon solid fa-sitemap" th:if="${session.id != null}"
+                                href="/board/insert"><span>글쓰기</span></a></li>
+                        <li><a class="icon solid fa-sitemap" th:if="${session.id != null}" href="/finditem">
+                                <span>주인을 찾아요! (습득물)</span></a></li>
+                        <li><a class="icon solid fa-sitemap" th:if="${session.id != null}" href="/lostitem">
+                                <span>잃어버렸나요? (분실물)</span></a></li>
+                        <li><a class="icon solid fa-sitemap" th:if="${session.id != null}"
+                                href="/message"><span>쪽지</span></a></li>
+                        <li><a class="icon solid fa-sitemap" th:if="${session.id != null}"
+                                href="/logout"><span>로그아웃</span></a></li>
+                        <li><a class="icon solid fa-sitemap" th:if="${session.id != null} and ${session.id != 'admin'}"
+                                href="/mypage"><span>마이페이지</span></a></li>
+                    <!-- 관리자 -->
+                    <li><a class="icon solid fa-sitemap" th:if="${session.id == 'admin'}"
+                            href="/admin"><span>관리자페이지</span></a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features">
+            <div class="container">
+                <header>
+                    <h2>분실물을 찾고 싶다면? <strong>PYNK</strong> 사이트로 !</h2><br>
+                </header>
+                <div class="row aln-center">
+                    <div class="col-4 col-6-medium col-12-small">
+
+                        <!-- Feature -->
+                        <section class="box">
+                            <header>
+                                <h3>WHY PYNK ?</h3>
+                            </header>
+                            <p>PYNK 사이트는 분실한 물건을 찾거나 <br>습득한 물건의 주인을 찾을 수 있도록<br> 돕는 플랫폼입니다.<br><br>
+                                분실했거나 습득한 물건의 정보를 등록하면<br>PYNK 회원들이 도움을 드릴 것입니다.
+                            </p>
+                        </section>
+
+                    </div>
+                    <div class="col-4 col-6-medium col-12-small">
+
+                        <!-- Feature -->
+                        <section class="box">
+                            <header>
+                                <h3>WHAT PYNK ?</h3>
+                            </header>
+                            <p>
+                                <strong>LOST ITEM</strong><br>분실물 SEARCH and FIND !<br><br>
+                                <strong>FIND ITEM</strong><br>습득물 SEARCH and FIND !<br><br><br>
+                                PYNK 사이트와 함께 분실물을 찾아보세요 !<br>
+                                &<br>
+                                물건의 주인을 찾아주세요 !
+                                </ul>
+                            </p>
+                        </section>
+
+                    </div>
+                    <div class="col-4 col-6-medium col-12-small">
+
+                        <!-- Feature -->
+                        <section class="box">
+                            <header>
+                                <h3>HOW PYNK ?</h3>
+                            </header>
+                            <p>
+                                <strong>로그인 | 회원가입</strong><br>회원가입 후 PYNK 사이트 이용 가능<br><br>
+                                <strong>게시글 등록</strong><br>분실or습득한 물건의 정보와 사진 등록<br> 정확한 날짜와 장소 입력 부탁 🙏<br><br>
+                                <strong>게시글 검색</strong><br>등록된 게시글을 검색하여<br> 분실or습득물을 찾아보세요<br><br>
+                                <strong>쪽지 사용</strong><br>다른 사용자와 손쉽게 쪽지를 주고받을 수 있는 메신저를 활용하세요
+                                </ol>
+                            </p>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div>
+        <!-- 맨 위로 올라가는 버튼 -->
+        <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">TOP</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

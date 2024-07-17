@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쪽지 확인</title>
+
+    <script>
+        function messageRe(sendid, receiveid) {
+            window.opener.location.href = "/message/send?userid=" + sendid + "&sessionid=" + receiveid;
+            window.close();
+        }
+        
+    </script>
+
+    <link rel="stylesheet" href="/css/message_notice.css">
+</head>
+
+<body>
+    <div>
+        <button class="logo-button" onclick="window.close()">
+            <img src="/img/logo/LOGO.png" alt="logo">
+        </button>
+    </div>
+    <div class="container">
+        <h2>받은쪽지</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>보낸 사람</th>
+                    <th>내용</th>
+                    <th>답장</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="message : ${messageList}">
+                    <td th:text="${message.sendid}"></td>
+
+                    <td th:if="${message.messagecheck} == 0">
+                        <a th:href="@{/message/check(seq=${message.seq})}" th:text="'새로운 쪽지가 도착했습니다'"></a>
+                    </td>
+
+                    <td th:if="${message.messagecheck} == 1" th:text="${message.message}"></td>
+                    <td>
+
+                        <button th:onclick="messageRe([[${message.sendid}]],[[${message.receiveid}]])">답장보내기</button>
+                    </td>
+                    
+                    <td><a th:href="@{/message/delete(seq=${message.seq})}">삭제</a></td>
+                </tr>
+            </tbody>
+        </table><br>
+
+        <h2>보낸쪽지</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>받은 사람</th>
+                    <th>내용</th>
+                    <th>취소</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="messageSend : ${messageSendList}">
+                    <td th:text="${messageSend.receiveid}"></td>
+                    <td th:text="${messageSend.message}"></td>
+                    <td><a th:href="@{/message/delete(seq=${messageSend.seq})}">보내기 취소</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

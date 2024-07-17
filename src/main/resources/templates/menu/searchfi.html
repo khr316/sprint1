@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인을 찾아요! (습득물)</title>
+    <script>
+        function sortByLatest() {
+            let postsContainer = document.querySelector('.posts');
+            let posts = Array.from(postsContainer.querySelectorAll('.post'));
+
+            posts.sort((a, b) => {
+                let dateA = new Date(a.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                let dateB = new Date(b.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                return dateB - dateA;
+            });
+
+            posts.forEach(post => postsContainer.appendChild(post));
+
+            // 버튼 스타일 변경
+            document.getElementById('latestBtn').classList.add('active');
+            document.getElementById('oldestBtn').classList.remove('active');
+        }
+
+        function sortByOldest() {
+            let postsContainer = document.querySelector('.posts');
+            let posts = Array.from(postsContainer.querySelectorAll('.post'));
+
+            posts.sort((a, b) => {
+                let dateA = new Date(a.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                let dateB = new Date(b.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                return dateA - dateB;
+            });
+
+            posts.forEach(post => postsContainer.appendChild(post));
+
+            // 버튼 스타일 변경
+            document.getElementById('latestBtn').classList.remove('active');
+            document.getElementById('oldestBtn').classList.add('active');
+        }
+    </script>
+    <link rel="stylesheet" href="/css/searchfi.css">
+</head>
+
+<body>
+    <header>
+        <a href="/main"><img src="/img/logo/로고.png" alt="로고" id="logo" style="width: 100px"></a>
+        <h2>주인을 찾아요! (습득물)</h2>
+    </header>
+
+    <a href="/finditem" class="back" style="margin-left: 20px; font-weight: bold; text-decoration: none;">뒤로가기</a>
+    <div class="container">
+        <div class="buttons">
+            <button id="latestBtn" onclick="sortByLatest()" class="active">최신순</button>
+            <button id="oldestBtn" onclick="sortByOldest()">오래된순</button>
+        </div>
+        <div class="search-bar">
+            <form action="/searchfi" method="get">
+                <input type="text" name="keyword" placeholder="제목 검색">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+
+        <!-- 검색 결과 섹션 -->
+        <section th:if="${keyword != null}">
+            <h2>검색 결과</h2>
+            <p class="search-word">검색어: <span th:text="${keyword}"></span></p>
+            <div class="posts" th:if="${not #lists.isEmpty(posts)}">
+                <div class="post" th:each="post : ${posts}">
+                    <a th:href="@{/detail(seq=${post.seq})}" style="text-decoration: none;">
+                        <img th:src="${post.itemImage}" alt="첨부 이미지">
+                        <div class="post-info">
+                            <p th:text="${post.title}" style="font-size: 20px;"></p>
+                            <p th:text="${post.id}"></p>
+                            <p th:text="${post.location1}"></p>
+                            <p th:text="'작성일자: ' + ${post.regDt}"></p>
+                            <p th:text="|조회수 ${post.cnt}|"></p>
+                            <p th:if="${post.find} == '0'" th:text="'찾는중😭'"></p>
+                            <p th:if="${post.find} == '1'" th:text="'찾기완료😁'"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div th:if="${#lists.isEmpty(posts)}">
+                <p>검색 결과가 없습니다.</p>
+            </div>
+        </section>
+
+        <section th:if="${keyword == null}">
+            <div class="posts" th:if="${userfiposts}">
+                <div class="post" th:each="post : ${userfiposts}">
+                    <a th:href="@{/detail(seq=${post.seq})}" style="text-decoration: none;">
+                        <img th:src="${post.itemImage}" alt="첨부 이미지">
+                        <div class="post-info">
+                            <p th:text="${post.title}" style="font-size: 20px;"></p>
+                            <p th:text="${post.id}"></p>
+                            <p th:text="${post.location1}"></p>
+                            <p th:text="'작성일자: ' + ${post.regDt}"></p>
+                            <p th:text="|조회수 ${post.cnt}|"></p>
+                            <p th:if="${post.find} == '0'" th:text="'찾는중😭'"></p>
+                            <p th:if="${post.find} == '1'" th:text="'찾기완료😁'"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주인을 찾아요! (습득물)</title>
+    <link rel="stylesheet" href="/css/finditem.css">
+    <script>
+        function sortByLatest() {
+            let postsContainer = document.querySelector('.posts');
+            let posts = Array.from(postsContainer.querySelectorAll('.post'));
+
+            posts.sort((a, b) => {
+                let dateA = new Date(a.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                let dateB = new Date(b.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                return dateB - dateA;
+            });
+
+            posts.forEach(post => postsContainer.appendChild(post));
+
+            // 버튼 스타일 변경
+            document.getElementById('latestBtn').classList.add('active');
+            document.getElementById('oldestBtn').classList.remove('active');
+        }
+
+        function sortByOldest() {
+            let postsContainer = document.querySelector('.posts');
+            let posts = Array.from(postsContainer.querySelectorAll('.post'));
+
+            posts.sort((a, b) => {
+                let dateA = new Date(a.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                let dateB = new Date(b.querySelector('.post-info p:nth-child(4)').textContent.replace('작성일자: ', ''));
+                return dateA - dateB;
+            });
+
+            posts.forEach(post => postsContainer.appendChild(post));
+
+            // 버튼 스타일 변경
+            document.getElementById('latestBtn').classList.remove('active');
+            document.getElementById('oldestBtn').classList.add('active');
+        }
+
+        // 스크롤 위치가 일정 이상 내려가면 버튼 보이기
+        window.onscroll = function() {scrollFunction()};
+            
+        function scrollFunction() {
+          var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        
+          if (document.documentElement.scrollTop > window.innerHeight * 0.9) {
+            scrollToTopBtn.style.display = "block";
+          } else {
+            scrollToTopBtn.style.display = "none";
+          }
+        }
+        
+        // 맨 위로 부드럽게 올라가는 기능 구현
+        function scrollToTop() {
+          var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        
+          if (scrollTop > 0) {
+            window.requestAnimationFrame(scrollToTop);
+            window.scrollTo(0, scrollTop - scrollTop / 8); // 부드러운 스크롤 조정 (8은 조정 강도를 나타냄)
+          }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <a href="/main"><img src="/img/logo/로고.png" alt="로고" id="logo" style="width: 100px"><br></a>
+        <h2>주인을 찾아요! (습득물)</h2>
+        <a th:if="${session.id != null}" href="/lostitem" class="move-lostitem">잃어버렸나요? (분실물)</a>
+    </header>
+
+    <div class="finditem-img">
+        <span>
+            <h2>WELCOME PYNK</h2>
+            <p>분실한 물건을 PYNK와 함께 찾아보세요</p><br><br>
+            <a href="/board/insert" style="text-decoration: none; color: rgb(33, 33, 33); font-weight: bold;">글쓰기</a>
+        </span>
+        <img src="/img/Lost&Find-new.png" alt="게시판">
+    </div>
+
+    <div class="button-container">
+        <button id="latestBtn" onclick="sortByLatest()" class="active">최신순</button>
+        <button id="oldestBtn" onclick="sortByOldest()">오래된순</button>
+    </div>
+    <div class="search-bar">
+        <form action="/searchfi" method="get">
+            <input type="text" name="keyword" placeholder="제목 검색">
+            <select name="sido">
+                <option value="" selected>---------------------</option>
+                <block th:each="sido : ${sidoList}">
+                    <option th:value="${sido.sido}">[[${sido.sido}]]</option>
+                </block>
+            </select>
+            <button type="submit">검색</button>
+        </form>
+    </div>
+    <div class="posts" th:if="${userfiposts}">
+        <div class="post" th:each="post : ${userfiposts}">
+            <a th:href="@{/detail(seq=${post.seq})}" style="text-decoration: none;">
+                <img th:src="${post.itemImage}" alt="첨부 이미지">
+                <div class="post-info">
+                    <p th:text="${post.title}" style="font-size: 20px;"></p>
+                    <p th:text="${post.id}"></p>
+                    <p th:text="${post.location1}"></p>
+                    <p th:text="'작성일자: ' + ${post.regDt}"></p>
+                    <p th:text="|조회수 ${post.cnt}|"></p>
+                    <p th:if="${post.find} == '0'" th:text="'찾는중😭'"></p>
+                    <p th:if="${post.find} == '1'" th:text="'찾기완료😁'"></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div>
+        <!-- 맨 위로 올라가는 버튼 -->
+        <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">TOP</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

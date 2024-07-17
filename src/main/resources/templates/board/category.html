@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물품 종류 선택 창</title>
+
+    <script>
+        function categoryDetailSelect() {
+            // 선택된 옵션의 텍스트 값을 가져옴
+            const categoryDetailSelect = document.getElementById("categoryDetail");
+            const selectedOption = categoryDetailSelect.options[categoryDetailSelect.selectedIndex];
+            const categoryDetail = selectedOption.text;
+
+            window.opener.setCategoryDetail(categoryDetail);
+            window.close();
+        }
+    </script>
+
+    <link rel="stylesheet" href="/css/category.css">
+</head>
+
+<body>
+    <div>
+        <!--물품 종류 (대분류) 고른 다음 뜨는 팝업창-->
+        <!--여기서는 상세종류를 고르게 되어있음-->
+        <select name="categoryDetail" id="categoryDetail">
+            <block th:each="categoryDetail : ${categoryDetail}">
+                <option th:value="${categoryDetail.catDeCode}" th:text="${categoryDetail.catDeName}"></option>
+            </block>
+        </select>
+        <button id="categoryDetailSelectButton" onclick="categoryDetailSelect()">선택</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

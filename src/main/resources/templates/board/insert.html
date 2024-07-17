@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기</title>
+    <script>
+        function locationInsert() {
+            const popup = window.open("/board/location", "", "width=900px,height=500px");
+        }
+
+        function setLocation(location, lon, lat) {
+            document.getElementById("location1").value = location;
+        }
+
+        function catDetail() {
+            const catCode = document.getElementById("category").value;
+            const popup = window.open("/board/category?catCode=" + catCode, "", "width=500px,height=200px");
+        }
+
+        function setCategoryDetail(detail) {
+            document.getElementById("categoryDetail").value = detail;
+        }
+    </script>
+    <link rel="stylesheet" href="/css/insert.css">
+</head>
+<body>
+    <div class="container"><!--글쓰기 페이지-->
+        <form action="/board/insert/action" method="post" enctype="multipart/form-data" class="insert-fm">
+            <!--로고 이미지 클릭하면 메인화면으로-->
+            <a href="/main"><img src="/img/logo/LOGO.png" alt="로고" id="logo"><br></a>
+            <h2>글쓰기</h2>
+            <input type="hidden" name="id" th:value="${id}">
+            <div class="radio-group">
+                <!--분실물인지 습득물인지 게시글 분류 선택-->
+                <label><input type="radio" name="code" value="0" checked> 분실물등록</label>
+                <label><input type="radio" name="code" value="1"> 습득물등록</label><br>
+            </div>
+
+            <label>제목</label>
+            <input type="text" name="title" required>
+
+            <label>분실 or 습득 날짜</label>
+            <div class="date-group">
+                <select name="year">
+                    <block th:each="year : ${#numbers.sequence(2020,2024)}">
+                        <option th:value="${year}" selected="2024">[[${year}]]</option>
+                    </block>
+                </select>
+                <select name="month">
+                    <block th:each="month : ${#numbers.sequence(01,12)}">
+                        <option th:value="${month}">[[${month}]]</option>
+                    </block>
+                </select>
+                <select name="day">
+                    <block th:each="day : ${#numbers.sequence(01,31)}">
+                        <option th:value="${day}">[[${day}]]</option>
+                    </block>
+                </select>
+            </div>
+
+            <p>분실 or 습득 위치</p>
+            <div class="location-group">
+                <input type="text" name="location1" id="location1" placeholder="위치를 검색해주세요" readonly>
+                <button type="button" onclick="locationInsert()" class="loca">위치검색</button>
+            </div>
+            <input type="text" name="location2" placeholder="상세 위치를 입력해주세요" required>
+
+            <label>이미지</label>
+            <input type="file" name="image">
+
+            <label>물품 종류</label>
+            <div class="category-group">
+                <select name="category" id="category">
+                    <block th:each="category : ${category}">
+                        <option th:value="${category.catCode}" th:text="${category.catName}"></option>
+                    </block>
+                </select>
+            </div>
+            <span>물품 상세종류</span>
+            <button type="button" onclick="catDetail()" class="thing">선택</button>
+            <input type="text" name="itemName" id="categoryDetail" placeholder="선택 버튼을 눌러 종류를 선택해주세요" readonly>
+            
+            <label>내용</label>
+            <textarea name="content" placeholder="상세 내용을 입력해주세요" required></textarea>
+            <button type="submit" class="end">등록</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+</html>

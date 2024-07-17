@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/mypage.css">
+    <script>
+        function messageNotice() {
+            const popup = window.open("/message/message_notice", "", "width=500px,height=500px");
+        }
+        function toggleEditForm(id) {
+            const form = document.getElementById(id);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('passwordField');
+            const passwordText = document.getElementById('passwordText');
+            const showPasswordButton = document.getElementById('showPasswordButton');
+            if (passwordField.style.display === 'none') {
+                passwordField.style.display = 'inline';
+                passwordText.style.display = 'none';
+                showPasswordButton.textContent = 'PW  ✖️';
+            } else {
+                passwordField.style.display = 'none';
+                passwordText.style.display = 'inline';
+                showPasswordButton.textContent = 'PW  ✔️';
+            }
+        }
+        // 스크롤 위치가 일정 이상 내려가면 버튼 보이기
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        
+          if (document.documentElement.scrollTop > window.innerHeight * 0.9) {
+            scrollToTopBtn.style.display = "block";
+          } else {
+            scrollToTopBtn.style.display = "none";
+          }
+        }
+
+        // 맨 위로 부드럽게 올라가는 기능 구현
+        function scrollToTop() {
+          var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        
+          if (scrollTop > 0) {
+            window.requestAnimationFrame(scrollToTop);
+            window.scrollTo(0, scrollTop - scrollTop / 8); // 부드러운 스크롤 조정 (8은 조정 강도를 나타냄)
+          }
+        }
+
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <a href="/main" class="logo">
+            <img src="/img/logo/로고.png" alt="logo">
+        </a>
+        <nav class="nav">
+            <a href="logout">로그아웃</a>
+            <a th:href="@{delete/user(id=${id})}">탈퇴</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="profile-section">
+            <div class="message-btn">
+                <span th:text="${messageCnt}"></span>
+                <button onclick="messageNotice()">쪽지 확인</button>
+            </div>
+            <div class="profile">
+                <h2>회원 정보</h2>
+                <table>
+                    <tr>
+                        <th>아이디</th>
+                        <td th:text="${userInfoSet.id}"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <td th:text="${userInfoSet.name}"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>전화번호</th>
+                        <td th:text="${userInfoSet.phone}"></td>
+                        <td>
+                            <button class="edit-btn" onclick="toggleEditForm('edit-phone-form')">수정</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td th:text="${userInfoSet.email}"></td>
+                        <td>
+                            <button class="edit-btn" onclick="toggleEditForm('edit-email-form')">수정</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="password-toggle">
+                                <button class="edit-btn" id="showPasswordButton" onclick="togglePasswordVisibility()">PW  ✔️</button>
+                            </div>
+                        </th>
+                        <td>
+                            <span id="passwordText" th:text="${'*'.repeat(userInfoSet.pw.length)}"></span>
+                            <span id="passwordField" th:text="${userInfoSet.pw}" style="display: none;"></span>
+                        </td>
+                        <td>
+                            <button class="edit-btn" onclick="toggleEditForm('edit-pw-form')">수정</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <form id="edit-phone-form" class="form-group edit-form-phone" action="/update/user/phone"
+                style="display: none;">
+                <input type="text" id="phone" name="phone" th:value="${userInfoSet.phone}">
+                <button type="submit" class="save-btn">저장</button>
+            </form>
+            <form id="edit-email-form" class="form-group edit-form-email" action="/update/user/email"
+                style="display: none;">
+                <input type="email" id="email" name="email" th:value="${userInfoSet.email}">
+                <button type="submit" class="save-btn">저장</button>
+            </form>
+            <form id="edit-pw-form" class="form-group edit-form-pw" action="/update/user/pw"
+            style="display: none;">
+            <input type="password" id="pw" name="pw" th:value="${userInfoSet.pw}">
+            <button type="submit" class="save-btn">저장</button>
+        </form>
+        </div>
+        <div class="posts">
+            <h2>작성한 글</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>종류</th>
+                        <th>상태</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="post : ${userBaordSet}">
+                        <td th:if="${post.code} == 0" th:text="'분실물'"></td>
+                        <td th:if="${post.code} == 1" th:text="'습득물'"></td>
+                        <td>
+                            <button type="button" th:onclick="findchange([[${post.find}]],[[${post.seq}]])" 
+                            th:if="${post.find} == '0'" class="findingbutton">찾는 중</button>
+                            <button type="button" th:onclick="findchange([[${post.find}]],[[${post.seq}]])" 
+                            th:unless="${post.find} == '0'" class="findbutton">찾기 완료</button>
+                        </td>
+
+                        <td><a th:href="@{/detail(seq=${post.seq})}">[[${post.title}]]</a></td>
+                        <td th:text="${post.regDt}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <!-- 맨 위로 올라가는 버튼 -->
+        <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">TOP</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+<script>
+    function findchange(find, postseq){
+        if(find == "1"){
+            find = "0";
+        }
+        else{
+            find = "1";
+        }
+        const link = "/find/check?find="+find+"&seq="+postseq;
+        location.href = link;
+    }
+</script>
+
+</html>

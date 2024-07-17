@@ -1,0 +1,298 @@
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Giants-Inline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body, div, h1, h2, h3, h4, p, a, ul, li, nav, section {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   font: inherit;
+   vertical-align: baseline;
+}
+
+body {
+   line-height: 1;
+   background: #f0f0f0;
+   font-weight: 300;
+   color: #777;
+   line-height: 1.65em;
+   font-size: 15pt;
+   font-family: 'BMDOHYEON';
+   user-select: none; /* 텍스트 선택 방지 */
+   -webkit-user-drag: none; /* 이미지 드래그 방지 */
+}
+
+h1, h2, h3 {
+   font-weight: 600;
+   text-transform: uppercase;
+   color: #888;
+}
+
+h1 a, h2 a, h3 a {
+   color: inherit;
+   text-decoration: none;
+   border: 0;
+}
+
+h2 {
+   font-size: 1.65em;
+   font-weight: 400;
+   letter-spacing: 4px;
+   margin: 0 0 1.5em 0;
+   line-height: 1.75em;
+}
+
+h2 strong {
+    color: #E7A5A6;
+}
+
+h3 {
+   font-size: 1em;
+   letter-spacing: 2px;
+   margin: 0 0 1.25em 0;
+}
+
+a {
+   transition: color 0.25s ease-in-out, border-bottom-color 0.25s ease-in-out;
+   color: #666;
+   text-decoration: none;
+   border-bottom: solid 1px #ddd;
+}
+
+a:hover {
+   color: #ed786a;
+   border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+strong, b {
+   font-weight: 600;
+   color: #666;
+}
+
+p {
+   text-align: justify;
+   margin-bottom: 2em;
+}
+
+ul {
+   list-style: disc;
+   padding-left: 1em;
+}
+
+ul li {
+   padding-left: 0.5em;
+   margin: 0.75em 0 0.75em 0;
+}
+
+.container {
+   margin: 0 auto;
+   max-width: 100%;
+   width: 70em;
+   padding: 2em;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-items: stretch; /* 박스 높이를 동일하게 맞춤 */
+    margin: 0 -15px; 
+}
+
+.row > * {
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.row > .col-4 {
+    width: 33.33333%;
+    display: flex; /* 박스 크기를 동일하게 맞추기 위해 추가 */
+    flex-direction: column; /* 박스 크기를 동일하게 맞추기 위해 추가 */
+}
+
+.box {
+    background: #fff2f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10%;
+    padding: 20px;
+    margin-bottom: 30px;
+    flex: 1; /* 박스 크기를 동일하게 맞추기 위해 추가 */
+    display: flex; /* 박스 내용 정렬을 위해 추가 */
+    flex-direction: column; /* 박스 내용 정렬을 위해 추가 */
+    justify-content: space-between; /* 박스 내용 정렬을 위해 추가 */
+    padding-bottom: 80px;
+}
+
+.box header {
+    margin-top: 40px;
+    margin-bottom: 20px; /* 헤더와 본문 사이에 일정한 간격을 추가 */
+    font-family: 'Giants-Inline';
+
+}
+
+.box h3{
+    color: #ED786A;
+    font-size: 30px;
+}
+
+.box p {
+    margin-top: 10px;
+    margin-bottom: auto;
+    color: #9E9E9E;
+}
+
+.box p strong {
+   color: #7A7A7A;
+}
+
+
+#page-wrapper > section {
+   margin-bottom: 0;
+}
+
+#header {
+   background: #fff;
+   text-align: center;
+}
+
+#header > .container {
+   padding: 7em 0 7em 0;
+   border-bottom: solid 2px #e5e5e5;
+   box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5;
+}
+
+#header h1 {
+   font-weight: 700;
+   color: #ed786a;
+   text-shadow: 0.05em 0.075em 0 rgba(0, 0, 0, 0.1);
+   font-size: 3em;
+   letter-spacing: 13px;
+}
+
+#header p {
+   text-transform: uppercase;
+   font-weight: 400;
+   color: #888;
+   margin: 2.5em 0 0 0;
+   font-size: 0.85em;
+   letter-spacing: 3px;
+   text-align: center;
+}
+
+#nav {
+   position: absolute;
+   top: 3em;
+   left: 0;
+   width: 100%;
+   cursor: default;
+}
+
+#nav > ul > li {
+   display: inline-block;
+   padding-right: 2em;
+}
+
+#nav > ul > li:last-child {
+   padding-right: 0;
+}
+
+#nav > ul > li > a {
+   border: 0;
+   text-decoration: none;
+   text-transform: uppercase;
+   font-weight: 400;
+   color: #777;
+   outline: 0;
+   display: block;
+}
+
+#nav > ul > li > a:before {
+   display: inline-block;
+   background: #878787;
+   color: #e4e4e4;
+   width: 2.25em;
+   font-size: 0.8em;
+   height: 2.25em;
+   border-radius: 2.25em;
+   line-height: 2.1em;
+   text-align: center;
+   box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.125);
+   margin-right: 0.75em;
+   transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
+}
+
+#nav > ul > li > a > span {
+   transition: color 0.25s ease-in-out;
+   font-size: 0.85em;
+   letter-spacing: 3px;
+}
+
+#nav > ul > li.active > a:before,
+#nav > ul > li:hover > a:before {
+   background: #ED786A;
+   color: #fff;
+}
+
+#nav > ul > li.active > a > span,
+#nav > ul > li:hover > a > span {
+   color: #ED786A;
+}
+
+#features {
+   background: #fff;
+   text-align: center;
+   padding: 6em 0;
+}
+
+#features p {
+   text-align: center;
+}
+
+#scrollToTopBtn {
+   display: none; /* 페이지 로딩 시 숨김 */
+   position: fixed;
+   bottom: 40px;
+   right: 20px;
+   z-index: 99;
+   font-size: 18px;
+   border: none;
+   outline: none;
+   color: rgb(211, 111, 111); /* 텍스트 색상을 원하는 색으로 지정 */
+   cursor: pointer;
+   padding: 15px;
+   border-radius: 4px;
+   background-color: rgba(0, 0, 0, 0); /* 투명한 배경*/
+   font-size: 20px;
+ }
+
+footer {
+    background-color: #d4b3b6;
+    color: #fff;
+    text-align: center; /* Align text center */
+    padding: 3px 0; /* Adjusted padding for spacing */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 16px; /* Adjust font size if needed */
+}
+
+footer p {
+    margin: 0; /* Remove default margin for <p> inside footer */
+    margin-left: 37.5%;
+}
+
+img{
+    margin-right: 180px;
+}
+

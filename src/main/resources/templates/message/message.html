@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쪽지보내기</title>
+    <link rel="stylesheet" href="/css/message.css">
+    <script>
+        function messageNotice() {
+            const popup = window.open("/message/message_notice", "","width=1000,height=600");
+        }
+        // 스크롤 위치가 일정 이상 내려가면 버튼 보이기
+        window.onscroll = function() {scrollFunction()};        
+
+        function scrollFunction() {
+          var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        
+          if (document.documentElement.scrollTop > window.innerHeight * 0.9) {
+            scrollToTopBtn.style.display = "block";
+          } else {
+            scrollToTopBtn.style.display = "none";
+          }
+        }
+
+        // 맨 위로 부드럽게 올라가는 기능 구현
+        function scrollToTop() {
+          var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        
+          if (scrollTop > 0) {
+            window.requestAnimationFrame(scrollToTop);
+            window.scrollTo(0, scrollTop - scrollTop / 8); // 부드러운 스크롤 조정 (8은 조정 강도를 나타냄)
+          }
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <div class="massage-dv">
+        <div class="header-container">
+            <a href="/main"><img src="/img/logo/LOGO.png" alt="logo"></a>
+            <p th:text="${messageCnt}" style="margin-left: 500px;"></p>
+            <button onclick="messageNotice()">쪽지 확인</button>
+        </div>
+        <h1>회원 목록</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>회원 아이디</th>
+                    <th>회원 이름</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${userList}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td><a th:href="@{/message/send(userid=${user.id},sessionid=${sessionId})}">쪽지보내기</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <!-- 맨 위로 올라가는 버튼 -->
+        <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">TOP</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

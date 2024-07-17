@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쪽지입력</title>
+    <link rel="stylesheet" href="/css/message_insert.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/main"><img src="/img/logo/LOGO.png" alt="logo"></a>
+        <form action="/message/send/action">
+
+            <label for="author">작성자:</label>
+
+            <span id="author" th:text="${sessionid}"></span><br>
+            
+            <textarea name="messageContent" placeholder="내용을 입력해주세요"></textarea><br>
+            
+            <input type="hidden" th:value="${sessionid}" name="sendid">
+            <input type="hidden" th:value="${userid}" name="receiveid">
+            
+            <button type="submit">[[${userid}]] 님에게 쪽지 보내기</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+</html>

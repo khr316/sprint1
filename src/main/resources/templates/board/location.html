@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>위치등록</title>
+
+    <script>
+        function locSelect(location) {
+            if (window.opener && !window.opener.closed) {
+                window.opener.setLocation(location);
+                window.close();
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="/css/location.css">
+
+</head>
+<body><!--위치 검색 하면 뜨는 창-->
+    <form action="/board/location" method="get">
+        <!--동 이름을 검색하면 나옴-->
+        <input type="text" placeholder="(ex)반포동" name="dong">
+        <button type="submit">검색</button>
+    </form>
+    <table>
+        <tr th:each="list : ${locList}">
+            <td>[[${list.sido}]] [[${list.gu}]] [[${list.dong}]] [[${list.ri}]]
+            </td>
+            <td>
+                <button type="button" 
+                th:onclick="locSelect([[${list.sido}]]+' '+[[${list.gu}]]+' '+[[${list.dong}]]+' '+[[${list.ri}]]+' ')">
+                선택
+                </button>
+            </td>
+        </tr>
+    </table>
+    <footer>
+        <p>&copy; 2024 Lucky PYNK Lost-and-found things. All rights reserved.</p>
+    </footer>
+</body>
+</html>

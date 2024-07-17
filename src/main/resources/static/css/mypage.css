@@ -1,0 +1,251 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    user-select: none; /* 텍스트 선택 방지 */
+    -webkit-user-drag: none; /* 이미지 드래그 방지 */
+}
+
+.header {
+    background-color: #E7A5A6;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+}
+
+.header .nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.header .nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.message-btn {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.message-btn button {
+    padding: 10px 20px;
+    background-color: #E7A5A6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.message-btn button:hover {
+    background-color: #d59496;
+}
+
+.findingbutton {
+    padding: 10px 20px;
+    background-color: #696969;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 100px;
+    height: 35px;
+}
+
+.findingbutton:hover {
+    background-color: #3f3f3f;
+}
+
+.findbutton {
+    padding: 10px 20px;
+    background-color: #e7b4b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 100px;
+    height: 35px;
+}
+
+.findbutton:hover {
+    background-color: #d59496;
+}
+
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.profile h2,
+.posts h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table td a {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+}
+table td a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#showPasswordButton{
+    background-color: #f2f2f2; 
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-top: 10px;
+}
+
+.form-group input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.edit-btn,
+.save-btn {
+    padding: 8px 16px;
+    background-color: #E7A5A6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.edit-btn:hover,
+.save-btn:hover {
+    background-color: #d59496;
+}
+
+.edit-form-phone {
+    position: absolute;
+    right: 20px;
+    top: 290px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.edit-form-email {
+    position: absolute;
+    right: 20px;
+    top: 355px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.edit-form-pw {
+    position: absolute;
+    right: 20px;
+    top: 410px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .edit-form {
+        right: 10px;
+        top: 10px;
+    }
+}
+
+img {
+    width: 100px;
+}
+
+footer {
+    background-color: #d4b3b6;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+#scrollToTopBtn {
+    display: none; /* 페이지 로딩 시 숨김 */
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    color: rgb(211, 111, 111); /* 텍스트 색상을 원하는 색으로 지정 */
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0); /* 투명한 배경*/
+    font-size: 20px;
+  }

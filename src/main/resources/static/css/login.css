@@ -1,0 +1,119 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    color: #b4b4b4;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e7a5a657;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    user-select: none; /* 텍스트 선택 방지 */
+    -webkit-user-drag: none; /* 이미지 드래그 방지 */
+}
+
+.login-dv {
+    width: 400px;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+#login-fm{
+    margin-top: 5px;
+}
+
+#login-fm h2 {
+    font-size: 36px;
+    color: #e7a5a6;
+    margin-bottom: 30px;
+}
+
+#login-fm p {
+    font-size: 14px;
+    color: #e7a5a6;
+}
+
+#login-fm input {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 17px;
+}
+
+#login-fm button {
+    width: 100%;
+    height: 45px;
+    background-color: #e7a5a6;
+    border-radius: 25px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#login-fm button:hover {
+    background-color: #da8485;
+}
+
+#login-fm a {
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #e7a5a6;
+    display: block;
+    margin-top: 20px;
+}
+
+#login-fm a:hover {
+    text-decoration: underline;
+}
+
+a {
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #e7a5a6;
+    display: block;
+    margin-top: 20px;
+}
+
+
+footer {
+    background-color: #d4b3b6;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+img{
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+img:hover{
+    filter: brightness(80%);
+}

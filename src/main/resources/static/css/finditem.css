@@ -1,0 +1,168 @@
+/* Reset CSS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    user-select: none; /* 텍스트 선택 방지 */
+    -webkit-user-drag: none; /* 이미지 드래그 방지 */
+}
+header {
+    background-color: #eee;
+    color: #777;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+header h2 {
+    margin-top: 13px;
+}
+header a {
+    color: #777;
+    text-decoration: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    background-color: #eee;
+}
+header a:hover{
+    background-color: #ccc;
+}
+header .move-lostitem{
+    margin-top: 10px;
+}
+.button-container {
+    text-align: center;
+    margin: 20px 0;
+}
+.button-container button {
+    padding: 7px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #555;
+    color: #fff;
+}
+.button-container button.active {
+    background-color: #777;
+}
+.finditem-img {
+    background-color: #E7A5A6;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+}
+.finditem-img img {
+    padding: 0 150px
+}
+.finditem-img span {
+    height: 100%;
+    align-items: center;
+    padding: 0 200px;
+    color: #777;
+}
+.finditem-img h2 {
+    line-height: 1.5;
+    font-size: 34px;
+    letter-spacing: -0.32px;
+}
+.finditem-img p {
+    margin-top: 16px;
+    line-height: 1;
+    font-size: 18px;
+    letter-spacing: -0.18;
+}
+.search-bar {
+    text-align: center;
+    margin: 20px 0;
+}
+.search-bar input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #555;
+    color: #fff;
+}
+.search-bar button:hover {
+    background-color: #777;
+}
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 120px;
+    padding: 0 100px;
+}
+.post {
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    padding: 10px;
+}
+.post img {
+    width: 278px;
+    height: 200px;
+    border-radius: 5px;
+}
+.post-info {
+    padding: 10px;
+}
+.post-info a {
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.post-info p {
+    color: #666;
+    margin-bottom: 5px;
+}
+footer {
+    background-color: #d4b3b6;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+#scrollToTopBtn {
+    display: none; /* 페이지 로딩 시 숨김 */
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    color: rgb(211, 111, 111); /* 텍스트 색상을 원하는 색으로 지정 */
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0); /* 투명한 배경*/
+    font-size: 20px;
+  }
